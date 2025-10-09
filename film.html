@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film & Serie - Cantina della Pepper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #252525, #535353);
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 50px;
+            text-align: center;
+            padding: 0px;
+            margin-top: -50px;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 100px;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-content {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .bottom-section {
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            height: auto; 
+        }
+        .box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            height: 300px;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .p1 {
+            color: white;
+            font-size: 30px;
+            margin: 15px 0 0 0;
+        }    
+        .movie-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .back-button {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px 30px;
+            margin: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+        .movie-title {
+            font-size: 24px;
+            color: white;
+            margin-top: 10px;
+        }
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-input {
+            padding: 12px 20px;
+            width: 300px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .category-selector {
+            padding: 12px 20px;
+            margin-left: 10px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 16px;
+        }
+        .player-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .player-iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+            border-radius: 10px;
+        }
+        .close-player {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loading {
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            margin: 40px 0;
+        }
+        .error {
+            color: #ff6b6b;
+            text-align: center;
+            font-size: 20px;
+            margin: 40px 0;
+        }
+        .vixsrc-info {
+            display: block;
+            color: #4fc3f7;
+            margin-top: 10px;
+            font-size: 14px;
+            font-style: italic;
+        }
+        .season-selector {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 16px;
+            display: none;
+            z-index: 1001;
+        }
+        .episode-selector {
+            position: absolute;
+            bottom: 20px;
+            left: 180px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 16px;
+            display: none;
+            z-index: 1001;
+        }
+        .play-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            background: #e50914;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner-content">Cantina della Pepper</div>
+    </div>
+    <h1>Film & Serie</h1>
+    <h2 style="color: white; text-align: center;">/ᐠ - ˕ -マ Ⳋ</h2>
+    <p style="color: white; text-align: center;">Ricorda che questa è una frontend non abbiamo nessun film nel nostro database (e se vi arrivano dei pop up basta che chiudete la scheda)</p>
+
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Cerca film o serie...">
+        <select class="category-selector" id="categorySelector">
+            <option value="multi">Tutto</option>
+            <option value="movie">Film</option>
+            <option value="tv">Serie TV</option>
+        </select>
+    </div>
+    
+    <div class="bottom-section" id="moviesContainer">
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i> Caricamento contenuti in corso...
+        </div>
+    </div>
+    
+    <div style="text-align: center;">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Torna alla Home
+        </a>
+    </div>
+
+    <div class="player-container" id="playerContainer">
+        <div class="close-player" id="closePlayer">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <select class="season-selector" id="seasonSelector">
+            <option value="">Seleziona stagione</option>
+        </select>
+        
+        <select class="episode-selector" id="episodeSelector">
+            <option value="">Seleziona episodio</option>
+        </select>
+        
+        <button class="play-btn" id="playBtn">Riproduci</button>
+        
+        <iframe class="player-iframe" id="playerIframe"></iframe>
+    </div>
+
+    <script>
+        const API_KEY = '9e43f45f94705cc8e1d5a0400d19a7b7';
+        const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+        const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+        const VIXSRC_BASE_URL = 'https://vixsrc.to';
+        const moviesContainer = document.getElementById('moviesContainer');
+        const searchInput = document.getElementById('searchInput');
+        const categorySelector = document.getElementById('categorySelector');
+        const playerContainer = document.getElementById('playerContainer');
+        const playerIframe = document.getElementById('playerIframe');
+        const closePlayer = document.getElementById('closePlayer');
+        const seasonSelector = document.getElementById('seasonSelector');
+        const episodeSelector = document.getElementById('episodeSelector');
+        const playBtn = document.getElementById('playBtn');
+        
+        let currentContent = null;
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            loadPopularContent();
+        });
+        
+        categorySelector.addEventListener('change', () => {
+            if (searchInput.value) {
+                searchContent();
+            } else {
+                loadPopularContent();
+            }
+        });
+        
+        searchInput.addEventListener('input', debounce(() => {
+            if (searchInput.value) {
+                searchContent();
+            } else {
+                loadPopularContent();
+            }
+        }, 500));
+        
+        closePlayer.addEventListener('click', () => {
+            playerContainer.style.display = 'none';
+            playerIframe.src = '';
+            resetSeasonSelectors();
+        });
+        
+        playBtn.addEventListener('click', () => {
+            playSelectedContent();
+        });
+        
+        seasonSelector.addEventListener('change', () => {
+            loadEpisodesForSeason(seasonSelector.value);
+        });
+        
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        function resetSeasonSelectors() {
+            seasonSelector.style.display = 'none';
+            episodeSelector.style.display = 'none';
+            playBtn.style.display = 'none';
+            seasonSelector.innerHTML = '<option value="">Seleziona stagione</option>';
+            episodeSelector.innerHTML = '<option value="">Seleziona episodio</option>';
+        }
+        
+        // Load popular content
+        async function loadPopularContent() {
+            moviesContainer.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Caricamento contenuti popolari...
+                </div>
+            `;
+            
+            try {
+                const type = categorySelector.value;
+                let url;
+                
+                if (type === 'multi') {
+                    url = `${TMDB_BASE_URL}/movie/popular?api_key=${API_KEY}&language=it-IT&page=1&without_genres=16`;
+                } else {
+                    url = `${TMDB_BASE_URL}/${type}/popular?api_key=${API_KEY}&language=it-IT&page=1&without_genres=16`;
+                }
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Errore API: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    displayContent(data.results, type === 'multi' ? 'movie' : type);
+                } else {
+                    moviesContainer.innerHTML = `
+                        <div class="error">
+                            <i class="fas fa-exclamation-triangle"></i> Nessun contenuto trovato.
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Errore nel caricamento dei contenuti:', error);
+                moviesContainer.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i> Errore nel caricamento dei contenuti. Riprova più tardi.
+                    </div>
+                `;
+            }
+        }
+        
+        async function searchContent() {
+            const query = searchInput.value;
+            const type = categorySelector.value;
+            
+            if (!query) {
+                loadPopularContent();
+                return;
+            }
+            
+            moviesContainer.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Ricerca di "${query}"...
+                </div>
+            `;
+            
+            try {
+                let url;
+                
+                if (type === 'multi') {
+                    url = `${TMDB_BASE_URL}/search/multi?api_key=${API_KEY}&language=it-IT&query=${encodeURIComponent(query)}&page=1&without_genres=16`;
+                } else {
+                    url = `${TMDB_BASE_URL}/search/${type}?api_key=${API_KEY}&language=it-IT&query=${encodeURIComponent(query)}&page=1&without_genres=16`;
+                }
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Errore API: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+             
+                    const filteredResults = type === 'multi' ? 
+                        data.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv') : 
+                        data.results;
+                    
+                    if (filteredResults.length > 0) {
+                        displayContent(filteredResults, type === 'multi' ? 'multi' : type);
+                    } else {
+                        moviesContainer.innerHTML = `
+                            <div class="error">
+                                <i class="fas fa-exclamation-triangle"></i> Nessun contenuto trovato per "${query}".
+                            </div>
+                        `;
+                    }
+                } else {
+                    moviesContainer.innerHTML = `
+                        <div class="error">
+                            <i class="fas fa-exclamation-triangle"></i> Nessun contenuto trovato per "${query}".
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Errore nella ricerca:', error);
+                moviesContainer.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i> Errore nella ricerca. Riprova più tardi.
+                    </div>
+                `;
+            }
+        }
+        
+        function displayContent(items, type) {
+            if (!items || items.length === 0) {
+                moviesContainer.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-film"></i> Nessun contenuto trovato.
+                    </div>
+                `;
+                return;
+            }
+            
+            let contentHTML = '';
+            
+            items.forEach(item => {
+                const mediaType = type === 'multi' ? item.media_type : type;
+                const title = mediaType === 'movie' ? item.title : item.name;
+                const posterPath = item.poster_path ? 
+                    `${IMG_BASE_URL}${item.poster_path}` : 
+                    'https://via.placeholder.com/150/2c3e50/ffffff?text=Nessuna+Immagine';
+                const date = mediaType === 'movie' ? item.release_date : item.first_air_date;
+                const year = date ? date.substring(0, 4) : 'N/A';
+                
+                contentHTML += `
+                    <div class="box" data-id="${item.id}" data-type="${mediaType}" data-title="${title}" onclick="openContent(${item.id}, '${mediaType}')">
+                        <img src="${posterPath}" alt="${title}" class="movie-image" onerror="this.src='https://via.placeholder.com/150/2c3e50/ffffff?text=Errore+Immagine'">
+                        <p class="p1">${title}</p>
+                        <p style="color: #ccc; margin: 5px 0;">${year}</p>
+                        <span class="vixsrc-info">Clicca per guardare</span>
+                    </div>
+                `;
+            });
+            
+            moviesContainer.innerHTML = contentHTML;
+        }
+        
+        async function openContent(id, type) {
+            try {
+                currentContent = { id, type };
+                
+                if (type === 'movie') {
+                    setIframeSrc(`${VIXSRC_BASE_URL}/movie/${id}?lang=it`);
+                    playerContainer.style.display = 'flex';
+                    resetSeasonSelectors();
+                } else {
+    
+                    const detailsResponse = await fetch(`${TMDB_BASE_URL}/tv/${id}?api_key=${API_KEY}&language=it-IT`);
+                    
+                    if (!detailsResponse.ok) {
+                        throw new Error(`Errore dettagli: ${detailsResponse.status}`);
+                    }
+                    
+                    const detailsData = await detailsResponse.json();
+                    
+                    seasonSelector.innerHTML = '<option value="">Seleziona stagione</option>';
+                    detailsData.seasons.forEach(season => {
+                        if (season.season_number > 0) {
+                            seasonSelector.innerHTML += `<option value="${season.season_number}">Stagione ${season.season_number}</option>`;
+                        }
+                    });
+                    
+                    seasonSelector.style.display = 'block';
+                    episodeSelector.style.display = 'block';
+                    playBtn.style.display = 'block';
+                    playerContainer.style.display = 'flex';
+                    
+                    playerIframe.src = '';
+                }
+            } catch (error) {
+                console.error('Errore nell\'apertura del contenuto:', error);
+                alert('Errore nel caricamento del contenuto. Riprova più tardi.');
+            }
+        }
+        
+        async function loadEpisodesForSeason(seasonNumber) {
+            if (!seasonNumber) {
+                episodeSelector.innerHTML = '<option value="">Seleziona episodio</option>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${TMDB_BASE_URL}/tv/${currentContent.id}/season/${seasonNumber}?api_key=${API_KEY}&language=it-IT`);
+                
+                if (!response.ok) {
+                    throw new Error(`Errore stagione: ${response.status}`);
+                }
+                
+                const seasonData = await response.json();
+                
+                episodeSelector.innerHTML = '<option value="">Seleziona episodio</option>';
+                seasonData.episodes.forEach(episode => {
+                    episodeSelector.innerHTML += `<option value="${episode.episode_number}">Episodio ${episode.episode_number}</option>`;
+                });
+            } catch (error) {
+                console.error('Errore nel caricamento degli episodi:', error);
+                alert('Errore nel caricamento degli episodi. Riprova più tardi.');
+            }
+        }
+        
+        function blockAnalytics(url) {
+            const blockedDomains = [
+                'roudoduor.com',
+                'analytics.vixcloud.co'
+            ];
+            return !blockedDomains.some(domain => url.includes(domain));
+        }
+
+        function setIframeSrc(url) {
+            if (blockAnalytics(url)) {
+                playerIframe.src = url;
+            }
+        }
+
+        function playSelectedContent() {
+            if (currentContent.type === 'movie') {
+                return;
+            }
+            
+            const season = seasonSelector.value;
+            const episode = episodeSelector.value;
+            
+            if (!season || !episode) {
+                alert('Seleziona sia la stagione che l\'episodio');
+                return;
+            }
+            
+            setIframeSrc(`${VIXSRC_BASE_URL}/tv/${currentContent.id}/${season}/${episode}?lang=it`);
+        }
+        
+        window.openContent = openContent;
+    </script>
+</body>
+</html>

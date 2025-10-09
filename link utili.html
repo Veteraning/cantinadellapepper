@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giochi - Cantina della Pepper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #252525, #535353);
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 50px;
+            text-align: center;
+            padding: 0px;
+            margin-top: -50px;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 100px;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        .box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            height: 300px;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .p1 {
+            color: white;
+            font-size: 30px;
+            margin: 15px 0 0 0;
+        }    
+        .game-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .back-button {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px 30px;
+            margin: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+        .game-title {
+            font-size: 24px;
+            color: white;
+            margin-top: 10px;
+        }
+        .link-list {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            margin: 30px auto;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+        }
+        .link-item {
+            display: block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .link-item:hover {
+            background: rgba(0, 0, 0, 0.6);
+            border-left: 4px solid #fff;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner">
+            <nav class="nav-links">
+            </nav>
+        </div>
+
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <a href="giochi.html" class="box">
+                <i class="fa" style="font-size: 48px; margin-bottom: 15px;"></i>
+                <h2>Giochi</h2>
+            </a>
+            
+            <a href="film.html" class="box">
+                <i class="fa" style="font-size: 48px; margin-bottom: 15px;"></i>
+                <h2>Film</h2>
+            </a>
+            
+            <a href="musica.html" class="box">
+                <i class="fa" style="font-size: 48px; margin-bottom: 15px;"></i>
+                <h2>Musica</h2>
+            </a>
+            
+            <a href="proxy.html" class="box">
+                <i class="fa" style="font-size: 48px; margin-bottom: 15px;"></i>
+                <h2>Link Utili</h2>
+            </a>
+        </div>
+
+        <style>
+            .bottom-section {
+                display: flex; 
+                justify-content: center; 
+                flex-wrap: wrap; 
+                background: rgba(0, 0, 0, 0.5);
+                padding: 20px;
+                margin: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                text-align: center;
+                position: relative;
+                height: auto; 
+            }
+            
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                gap: 30px;
+            }
+            
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;
+                transition: color 0.3s ease;
+            }
+            
+            .nav-links a:hover {
+                color: #aaa;
+            }
+            
+            .box {
+                background: rgba(0, 0, 0, 0.5);
+                padding: 20px;
+                margin: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                text-align: center;
+                position: relative;
+                height: 300px;
+                width: 300px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: white;
+            }
+            
+            .box:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.7);
+            }
+            
+            .box h2 {
+                margin: 0;
+                font-size: px;
+            }
+            p4 {
+                color:white;
+                text-align: center;
+            }
+        </style>
+    </div>
+    
+    <h1>LAVORO IN CORSO (se vedi quest va via bro hackeri un càzzò)</h1>
+    <!-- 
+        <h2 style="color: white; text-align: center;">/ᐠ - ˕ -マ Ⳋ</h2>
+        <p style="color: white; text-align: center;">Ricorda sempre usare FireFox/Brave o qualsiasi browser di privacy + uBlock</p>
+        
+        <div class="link-list">
+            <h2 style="text-align: center; margin-bottom: 0px; font-size: 35px;">--Risorse Utili--</h2>
+
+            <a href="https://fmhy.net" class="link-item">
+                Free media heck yeah
+            </a>
+            <a href="https://www.reddit.com/r/Piracy/wiki/megathread/" class="link-item">
+                r/piracy MegaThread
+            </a>
+            <a href="https://shakil-shahadat.github.io/awesome-piracy/" class="link-item">
+                Awesome Piracy
+            </a>
+            <h2 style="text-align: center; margin-bottom: 0px; padding-top: 50px; font-size: 30px;">Giochi</h2>
+            <a href="https://steamrip.com/" class="link-item">
+                SteamRIP
+            </a>
+            <a href="https://fitgirl-repacks.site/" class="link-item">
+                FitGirl Repacks
+            </a>
+            <a href="https://crocdb.net/" class="link-item">
+                Crocdb (per le rom)
+            </a>
+            <a href="https://gn-math.github.io/" class="link-item">
+                Giochi "Portati" al web
+            </a>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Torna alla Home
+            </a>
+             <h2 style="text-align: center; margin-bottom: 0px; padding-top: 50px; font-size: 30px;">Film</h2>
+             <a href="https://streamingcommunityz.online/" class="link-item">
+                Streaming Community
+            </a>
+        </div>
+    -->
+        <div style="text-align: center;">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Torna alla Home caro skid
+            </a>
+        </div>
+    </div>
+</body>
+</html>

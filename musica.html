@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musica - Cantina della Pepper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #252525, #535353);
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 50px;
+            text-align: center;
+            padding: 0px;
+            margin-top: -50px;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 100px;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .bottom-section {
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            height: auto; 
+        }
+        .box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            height: 300px;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .p1 {
+            color: white;
+            font-size: 30px;
+            margin: 15px 0 0 0;
+        }    
+        .game-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .back-button {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px 30px;
+            margin: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+        .game-title {
+            font-size: 24px;
+            color: white;
+            margin-top: 10px;
+        }
+        iframe {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            width: 100%;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner"></div>
+    <h1>Musica</h1>
+    <h2 style="color: white; text-align: center;">/ᐠ - ˕ -マ Ⳋ</h2>
+    <p style="color: white; text-align: center;">doo dodo doo do do</p>
+    
+    <div class="bottom-section">
+        <iframe src="https://nebulilabs.github.io/NebuliOS/musicplayer.html" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    
+    <div style="text-align: center;">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Torna alla Home
+        </a>
+    </div>
+</body>
+</html>
